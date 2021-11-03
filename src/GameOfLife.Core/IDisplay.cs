@@ -2,6 +2,7 @@
 {
   public interface IDisplay
   {
-    void Render(Game game);
+    Game Game { get; }
+    void Render();
   }
 }

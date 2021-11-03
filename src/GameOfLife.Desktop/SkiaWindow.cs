@@ -7,18 +7,6 @@ namespace GameOfLife.Desktop;
 
 public class SkiaWindow : GameWindow
 {
-  public struct RenderInfo
-  {
-    public readonly SKCanvas Canvas;
-    public readonly SKSize Size;
-
-    public RenderInfo(SKCanvas canvas, SKSize size)
-    {
-      Canvas = canvas;
-      Size = size;
-    }
-  }
-
   private const SKColorType ColorType = SKColorType.Rgba8888;
   private const GRSurfaceOrigin SurfaceOrigin = GRSurfaceOrigin.BottomLeft;
 
@@ -29,7 +17,7 @@ public class SkiaWindow : GameWindow
   private SKSurface? _surface;
   private SKCanvas? _canvas;
 
-  public event EventHandler<RenderInfo>? PaintSurface;
+  public event EventHandler<SkiaFrameEventArgs>? PaintSurface;
 
   public int Width => Size.X;
   public int Height => Size.Y;
@@ -65,7 +53,7 @@ public class SkiaWindow : GameWindow
       CreateSurface();
 
     using (new SKAutoCanvasRestore(_canvas, true))
-      PaintSurface?.Invoke(this, new RenderInfo(_canvas!, newSize));
+      PaintSurface?.Invoke(this, new SkiaFrameEventArgs(_canvas!, newSize, args.Time));
 
     // update the control
     _canvas?.Flush();
