@@ -15,11 +15,11 @@ internal sealed class GameLoop
 
   public async Task Run(TimeSpan delayPerCycle)
   {
-    _display.Render(_game);
+    _display.Render();
     while (true)
     {
       bool isOver = !_game.Cycle();
-      _display.Render(_game);
+      _display.Render();
       if (isOver)
         break;
 

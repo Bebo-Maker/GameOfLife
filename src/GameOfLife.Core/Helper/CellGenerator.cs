@@ -1,6 +1,6 @@
 ﻿namespace GameOfLife.Core
 {
-  public static class Generator
+  public static class CellGenerator
   {
     private static readonly Random Random = new();
     

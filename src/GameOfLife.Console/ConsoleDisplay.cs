@@ -4,13 +4,20 @@ namespace GameOfLife.Console;
 
 internal sealed class ConsoleDisplay : IDisplay
 {
-  public void Render(Game game)
+  public Game Game { get; }
+
+  public ConsoleDisplay(Game game)
+  {
+    Game = game;
+  }
+
+  public void Render()
   {
     System.Console.Clear();
 
-    for (int y = 0; y < game.Rows; y++)
+    for (int y = 0; y < Game.Rows; y++)
     {
-      string line = GetLineString(game, y);
+      string line = GetLineString(Game, y);
       System.Console.WriteLine(line);
     }
   }
